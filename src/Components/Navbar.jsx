@@ -1,8 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
-function Navbar() {
+function Navbar({isLogin,user,setIsLogin}) {
 
+  const logout =()=>{
+    setIsLogin(false)
+    Cookies.remove("accessToken")
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,8 +68,9 @@ function Navbar() {
     </ul>
     
   </div>
-  <Link to="/login"><button type="button" className="btn btn-primary">Login</button></Link>
-  <Link to="/signup"><button type="button" className="btn btn-primary mx-2">Sign up</button></Link>
+  {!isLogin&&<Link to="/login"><button type="button" className="btn btn-primary">Login</button></Link>}
+  {!isLogin&&<Link to="/signup"><button type="button" className="btn btn-primary mx-2">Sign up</button></Link>}
+  {isLogin&&<button type="button" onClick={logout} className="btn btn-primary mx-2">Logout</button>}
 </nav>
 
   

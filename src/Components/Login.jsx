@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Cookies from "js-cookie";
+import { useOutletContext } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
@@ -10,6 +12,11 @@ function Login() {
   const [success,setSuccess]=useState(false);
   const [error,setError]=useState(false);
   const [errorMessage,setErrorMessage]=useState("");
+
+  const navigate=useNavigate()
+
+  const [isLogin,setIsLogin]=useOutletContext()
+  console.log(isLogin)
 
   let accessToken = Cookies.get("accessToken")
   console.log(accessToken)
@@ -28,10 +35,12 @@ function Login() {
             ...data
         }
         })
-        // const accesstoken = user.accesstoken;
+        const accesstoken = user.accesstoken;
         console.log(user.data.data.accessToken)
         Cookies.set("accessToken",user.data.data.accessToken)
         setSuccess(true)
+        setIsLogin(true)
+        navigate("/")
     } catch (error) {
         setError(true);
         setErrorMessage(error.message)
