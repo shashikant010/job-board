@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-function Navbar({isLogin,user,setIsLogin}) {
+function Navbar({isLogin,user,setIsLogin,setUser}) {
+  console.log(user)
 
   const logout =()=>{
     setIsLogin(false)
+    setUser({})
     Cookies.remove("accessToken")
   }
 
@@ -70,6 +72,7 @@ function Navbar({isLogin,user,setIsLogin}) {
   </div>
   {!isLogin&&<Link to="/login"><button type="button" className="btn btn-primary">Login</button></Link>}
   {!isLogin&&<Link to="/signup"><button type="button" className="btn btn-primary mx-2">Sign up</button></Link>}
+  {isLogin&&<button type="button" className="btn btn-warning  mx-2 rounder-circle">{user.username}</button>} 
   {isLogin&&<button type="button" onClick={logout} className="btn btn-primary mx-2">Logout</button>}
 </nav>
 

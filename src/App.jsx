@@ -8,11 +8,12 @@ import Cookies from 'js-cookie'
 
 function App() {
   const [isLogin,setIsLogin]=useState(false);
-  let user={};
+  const [user,setUser]=useState({})
   const accessToken = Cookies.get("accessToken")
   useEffect(()=>{
     (async()=>{
       try {
+        if(!user._id){
         const url = "http://localhost:8000/user/getcurrentuser"
          const res = await axios(url,{
           method: 'POST',
@@ -21,9 +22,9 @@ function App() {
           accessToken
       }
       })
-      user=res.data.data
+      setUser(res.data.data)
       console.log(user)
-      setIsLogin(true)
+      setIsLogin(true)}
       } catch (error) {
         
       }
@@ -32,7 +33,7 @@ function App() {
   })
   return (
     <>
-    <Navbar isLogin={isLogin} user={user} setIsLogin={setIsLogin}/>
+    <Navbar isLogin={isLogin} user={user} setIsLogin={setIsLogin} setUser={setUser}/>
     <Outlet context={[isLogin,setIsLogin]}/>
       
     </>
