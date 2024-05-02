@@ -40,6 +40,7 @@ function Login() {
         Cookies.set("accessToken",user.data.data.accessToken)
         setSuccess(true)
         setIsLogin(true)
+        localStorage.setItem("accessToken",user.data.data.accessToken)
         navigate("/")
     } catch (error) {
         setError(true);
@@ -53,13 +54,13 @@ function Login() {
     <h1 style={{textAlign:"center"}} className='my-2'>Login</h1>
 
     {success && <div className="alert alert-success" role="alert">
-            Your account is created successFUllY   <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
+            You are logged in <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
 </div>}
 
     {error && <div className="alert alert-danger" role="alert">
-  Some error occured while signing up . <br />
+  Some error occured while Logging in . <br />
   error : {errorMessage}<br/>
-  please try again
+  please try again after some time
 </div>}
 
 

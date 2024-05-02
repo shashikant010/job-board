@@ -49,13 +49,13 @@ function Signup() {
 
 
       {success && <div className="alert alert-success" role="alert">
-            Your account is created successFUllY   <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
+            Your account is created successfully  <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
 </div>}
 
     {error && <div className="alert alert-danger" role="alert">
   Some error occured while signing up . <br />
   error : {errorMessage}<br/>
-  please try again
+  please try again after some time
 </div>}
 
       <div className='d-flex justify-content-center align-items-ceter my-4 '>
