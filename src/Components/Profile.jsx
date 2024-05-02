@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { useOutletContext, } from 'react-router-dom'
+import { useNavigate, useOutletContext, } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 
 // {!isLogin && <h1>Please Login to see your profile</h1>}
 function Profile() {
     const [isLogin]=useOutletContext()
     const context = useOutletContext();
+    const navigate = useNavigate()
     const user = context[2];
     let lastLoginTime=null;
     if(isLogin){
@@ -48,7 +49,9 @@ function Profile() {
                 <span style={{fontWeight:"bold",fontSize:"30px"}}>{lastLoginTime} </span>
                 </div>
 
-                {user.isEmployer && <button type="button" class="btn btn-success my-2">Post Jobs</button>}
+                {user.isEmployer && <button onClick={()=>{
+          navigate("/postjob")
+        }} type="button" className="btn btn-success my-2">Post Jobs</button>}
 
 
             </div>

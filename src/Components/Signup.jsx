@@ -104,7 +104,11 @@ function Signup() {
 
                 {!isEmployer && <div className="form-group">
                     <label htmlFor="skills">Skills</label>
-                    {skills[0] && <p>skills you selected : {...skills+" "}</p>}
+                    {skills[0] && <p>skills you selected : {skills.map((item)=>{
+                        return(<span>
+                            <button className='btn btn-info m-1' onClick={(e)=>e.preventDefault()}>{item}</button> 
+                        </span> )
+                        })}</p>}
                     <input
                     type="text"
                     className="form-control"

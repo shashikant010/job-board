@@ -8,6 +8,7 @@ import Login from './Components/Login.jsx'
 import Signup from './Components/Signup.jsx'
 import Profile from './Components/Profile.jsx'
 import BrowseJobs from './Components/BrowseJobs.jsx'
+import Postjobs from './Components/Postjobs.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path:"/browsejobs",
         element:<BrowseJobs/>
+      },
+      {
+        path:"/postjob",
+        element:<Postjobs/>
       }
     ]
   }

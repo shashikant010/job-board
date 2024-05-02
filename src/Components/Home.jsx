@@ -1,9 +1,10 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 
 function Home() {
   const navigate = useNavigate();
+  const [isLogin] = useOutletContext();
   return (
     <>
       <div className="d-flex flex-column justify-content-center align-items-center my-5" style={{height:"400px",fontSize:"20px"}}>
@@ -13,7 +14,7 @@ function Home() {
         <button type="button" onClick={()=>{
           navigate("/browsejobs")
         }} className="btn btn-info " style={{height:"60px",fontSize:"30px",color:"white"}}>Browse Jobs</button>
-        <Link to="/signup" style={{textDecoration:"none"}}><p style={{color:"rgb(4, 102, 135)",fontWeight:"bold",fontSize:"15px"} } className="my-2">Employer ? Post a JOB now </p>  </Link>  
+        <Link to={isLogin?"/postjob":"/signup"} style={{textDecoration:"none"}}><p style={{color:"rgb(4, 102, 135)",fontWeight:"bold",fontSize:"15px"} } className="my-2">Employer ? Post a JOB now </p>  </Link>  
       </div>
       </>
   )
