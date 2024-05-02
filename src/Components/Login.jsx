@@ -60,7 +60,7 @@ function Login() {
     {error && <div className="alert alert-danger" role="alert">
   Some error occured while Logging in . <br />
   error : {errorMessage}<br/>
-  please try again after some time
+  please try again after some timea
 </div>}
 
 

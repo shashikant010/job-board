@@ -4,7 +4,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function Signup() {
+    const [isEmployer,setIsEmployer]=useState(false)
     const [username,setUsername]= useState("");
+    const [organization,setOrganization]=useState("")
     const [fullName,setfullName]=useState("");
     const [skill,setSkill]=useState("")
     const [skills,setSkills]=useState([]);
@@ -14,6 +16,7 @@ function Signup() {
     const [error,setError]=useState(false);
     const [errorMessage,setErrorMessage]=useState("");
 
+        
     const navigate=useNavigate();
     const handleSignup=async(e)=>{
         try {
@@ -24,7 +27,7 @@ function Signup() {
                 fullName,
                 skills,
                 email,
-                password
+                password,isEmployer,organization
             }
             console.log(data)
             const user = await axios(url,{
@@ -58,8 +61,22 @@ function Signup() {
   please try again after some time
 </div>}
 
-      <div className='d-flex justify-content-center align-items-ceter my-4 '>
-            <form className='w-50' >
+                        <div className='d-flex justify-content-center align-items-ceter my-4 '>
+                                <form className='w-50' >
+                                <div className="form-check">
+                            <input 
+                            checked={isEmployer}
+                            onChange={(e)=>{
+                                setIsEmployer(e.target.checked)
+                            }}
+                            className="form-check-input" 
+                            type="checkbox"  
+                            id="flexCheckDefault"
+                            />
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                        Are you a Employer
+                    </label>
+                    </div>
                     <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input
@@ -85,7 +102,7 @@ function Signup() {
                     />
                 </div>
 
-                <div className="form-group">
+                {!isEmployer && <div className="form-group">
                     <label htmlFor="skills">Skills</label>
                     {skills[0] && <p>skills you selected : {...skills+" "}</p>}
                     <input
@@ -107,7 +124,23 @@ function Signup() {
                         
                     }}}
                     />
-                </div>
+                </div>}
+
+
+                {isEmployer && <div className="form-group">
+                    <label htmlFor="skills">Organization Name</label>
+                    <input
+                    type="text"
+                    className="form-control"
+                    value={organization}
+                    id="skills"
+                    placeholder="Name of Your Orgaization"
+                    onChange={(e)=>{
+                        setOrganization(e.target.value)
+                    
+                    }}
+                    />
+                </div>}
 
                 <div className="form-group">
                     <label htmlFor="Email">Email address</label>

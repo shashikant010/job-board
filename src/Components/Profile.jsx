@@ -27,11 +27,11 @@ function Profile() {
             // <div className='h-100 d-flex justify-content-center align-items-center flex-column'>
             //     <h2 className='h-200 ' style={{margin:"300px"}}>hello this is your profile {user.fullName}</h2>
             //     </div>
-            <div className='container d-flex flex-column justify-content-center align-items-center' style={{height:"600px", width:"100%", backgroundColor:"green"}}>
+            <div className='container d-flex flex-column justify-content-center align-items-center' style={{height:"600px", width:"100%"}}>
 
                 <div className='d-flex flex-column justify-content-center align-items-center' style={{backgroundColor:"lightblue",border:"2px solid black",borderRadius:"50%",width:"150px", height:"150px"}}><h1 style={{textAlign:"center",fontSize:"70px"}}><i class="fa-solid fa-user "></i><br/><p style={{textAlign:"center",fontSize:"30px"}}>{user.username}</p></h1></div>
-                <div style={{backgroundColor:"gray",height:"60%",width:"100%"}}>
-                <h3>Skills: </h3>{user.skills.map((item)=>{
+                <div className="my-2" style={{backgroundColor:"lightgray",height:"60%",width:"100%",padding:"20px",borderRadius:"10px"}}>
+                {!user.isEmployer&&<h3>Skills: </h3>}{user.skills.map((item)=>{
                     return(
                         <span style={{fontWeight:"bold",fontSize:"30px"}}>{item} </span>
                     )
@@ -47,6 +47,8 @@ function Profile() {
                 <h3>Last login: </h3>
                 <span style={{fontWeight:"bold",fontSize:"30px"}}>{lastLoginTime} </span>
                 </div>
+
+                {user.isEmployer && <button type="button" class="btn btn-success my-2">Post Jobs</button>}
 
 
             </div>
