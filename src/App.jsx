@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 function App() {
   const [isLogin,setIsLogin]=useState(false);
   const [user,setUser]=useState({})
+  const [job,setJob]=useState({})
   const accessToken = Cookies.get("accessToken") || localStorage.getItem("accessToken")
   
   useEffect(()=>{
@@ -35,7 +36,7 @@ function App() {
   return (
     <>
     <Navbar isLogin={isLogin} user={user} setIsLogin={setIsLogin} setUser={setUser}/>
-    <Outlet context={[isLogin,setIsLogin,user,setUser]}/>
+    <Outlet context={[isLogin,setIsLogin,user,setUser,job,setJob]}/>
       
     </>
   )

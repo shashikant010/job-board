@@ -15,7 +15,7 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <Link className="navbar-brand" to="/">
-    Job Board
+     &nbsp; Job Board
   </Link>
   <button
     className="navbar-toggler"

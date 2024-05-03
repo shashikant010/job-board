@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Job from './Job'
 import axios from 'axios'
+import { useOutletContext } from 'react-router-dom'
 
 function BrowseJobs () {
   const [jobs,setJobs]=useState([])
+  
   useEffect(()=>{
+    if(!jobs[0]){
     ;(
+      
       async()=>{
         const url ="http://localhost:8000/user/getalljobs"
         const res= await axios(url,{
@@ -17,13 +21,13 @@ function BrowseJobs () {
 
       }
 
-    )()
+    )()}
   })
   return (
     <div className='d-flex flex-row'>
        {jobs.map((job)=>{
         return(<span key={job._id} className='d-flex flex-row ' style={{width:"20%"}}>
-          <Job title={job.title}  description={job.description}/>
+          <Job title={job.title}  description={job.description} job={job}/>
         </span>)
        })}
     </div>

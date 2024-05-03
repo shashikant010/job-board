@@ -9,6 +9,7 @@ import Signup from './Components/Signup.jsx'
 import Profile from './Components/Profile.jsx'
 import BrowseJobs from './Components/BrowseJobs.jsx'
 import Postjobs from './Components/Postjobs.jsx'
+import Jobdetail from './Components/Jobdetail.jsx'
 
 const router = createBrowserRouter([
   {
@@ -34,10 +35,15 @@ const router = createBrowserRouter([
       {
         path:"/browsejobs",
         element:<BrowseJobs/>
+
       },
       {
         path:"/postjob",
         element:<Postjobs/>
+      },
+      {
+        path:"/jobdetail",
+        element:<Jobdetail/>
       }
     ]
   }
