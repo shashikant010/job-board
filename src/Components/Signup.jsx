@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "../css/button.css"
 
 function Signup() {
     const [isEmployer,setIsEmployer]=useState(false)
@@ -173,11 +174,14 @@ function Signup() {
                 <button  className="btn btn-primary my-2" onClick={handleSignup}>
                     Sign up
                 </button>
+                
+                
                 </div>
 </form>
 </div>
 </>
   )
 }
+
 
 export default Signup

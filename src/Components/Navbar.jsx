@@ -71,8 +71,20 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
     </ul>
     
   </div>
-  {!isLogin&&<Link to="/login"><button type="button" className="btn btn-primary">Login</button></Link>}
-  {!isLogin&&<Link to="/signup"><button type="button" className="btn btn-primary mx-2">Sign up</button></Link>}
+  {!isLogin&&<Link to="/login"><button>
+    Login
+    <div class="arrow-wrapper">
+        <div class="arrow"></div>
+
+    </div>
+</button></Link>}
+  {!isLogin&&<Link to="/signup"><button>
+    Sign up
+    <div class="arrow-wrapper">
+        <div class="arrow"></div>
+
+    </div>
+</button></Link>}
   {isLogin&&<button type="button" onClick={logout} className="btn btn-primary mx-2">Logout</button>}
   {isLogin&&<Link to="/profile"><button type="button" className="btn btn-warning  mx-2 rounded-circle font-weight-bold ">{user.fullName }</button></Link>} 
 </nav>
