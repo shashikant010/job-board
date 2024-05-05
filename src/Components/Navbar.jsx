@@ -73,15 +73,15 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
   </div>
   {!isLogin&&<Link to="/login"><button>
     Login
-    <div class="arrow-wrapper">
-        <div class="arrow"></div>
+    <div className="arrow-wrapper">
+        <div className="arrow"></div>
 
     </div>
 </button></Link>}
   {!isLogin&&<Link to="/signup"><button>
     Sign up
-    <div class="arrow-wrapper">
-        <div class="arrow"></div>
+    <div className="arrow-wrapper">
+        <div className="arrow"></div>
 
     </div>
 </button></Link>}

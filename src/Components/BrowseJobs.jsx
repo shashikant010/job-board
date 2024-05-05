@@ -24,7 +24,7 @@ function BrowseJobs () {
     )()}
   })
   return (
-    <div className='d-flex flex-row'>
+    <div className='d-flex flex-row flex-wrap'>
        {jobs.map((job)=>{
         return(<span key={job._id} className='d-flex flex-row ' style={{width:"20%"}}>
           <Job title={job.title}  description={job.description} job={job}/>
