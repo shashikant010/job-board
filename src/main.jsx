@@ -10,6 +10,7 @@ import Profile from './Components/Profile.jsx'
 import BrowseJobs from './Components/BrowseJobs.jsx'
 import Postjobs from './Components/Postjobs.jsx'
 import Jobdetail from './Components/Jobdetail.jsx'
+import SearchJob from './Components/Searchjob.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path:"/jobdetail",
         element:<Jobdetail/>
+      },
+      {
+        path:"/search",
+        element:<SearchJob/>
       }
     ]
   }
