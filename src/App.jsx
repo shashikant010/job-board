@@ -16,7 +16,7 @@ function App() {
     (async()=>{
       try {
         if(!user._id){
-        const url = "http://localhost:8000/user/getcurrentuser"
+        const url = `${import.meta.env.VITE_BACKEND_URL}/user/getcurrentuser`
          const res = await axios(url,{
           method: 'POST',
           mode:"no-cors",

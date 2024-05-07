@@ -24,7 +24,7 @@ function Login() {
   const handleLogin=async(e)=>{
     try {
         e.preventDefault();
-        const url = "import.meta.env.VITE_BACKEND_URL/user/login"
+        const url = `${import.meta.env.VITE_BACKEND_URL}/user/login`
         const data={
             email,
             password

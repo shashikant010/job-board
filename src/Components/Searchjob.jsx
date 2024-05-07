@@ -15,7 +15,7 @@ function SearchJob () {
     ;(
       
       async()=>{
-        const url =`import.meta.env.VITE_BACKEND_URL/user/searchjob/${serachItem}`
+        const url =`${import.meta.env.VITE_BACKEND_URL}/user/searchjob/${serachItem}`
         const res= await axios(url,{
           mode:"no-cors",
           method:"post"
