@@ -22,7 +22,7 @@ function Signup() {
     const handleSignup=async(e)=>{
         try {
             e.preventDefault();
-            const url = "http://localhost:8000/user/signup"
+            const url = "import.meta.env.VITE_BACKEND_URL/user/signup"
             const data={
                 username,
                 fullName,

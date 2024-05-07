@@ -10,7 +10,7 @@ function Postjobs() {
     const [isJobPosted,setIsJobPosted]=useState(false)
 
     const postjob=async()=>{
-      const url = "http://localhost:8000/user/postjob"
+      const url = "import.meta.env.VITE_BACKEND_URL/user/postjob"
       const data = {
         title,
         description,

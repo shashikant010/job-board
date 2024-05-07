@@ -14,7 +14,7 @@ function Jobdetail() {
     useEffect(()=>{
       if(!job){
       (async()=>{
-        const url = `http://localhost:8000/user/getitem/${job.owner}`;
+        const url = `import.meta.env.VITE_BACKEND_URL/user/getitem/${job.owner}`;
         const res = await axios(url,{
           method:"post",
           mode:"no-core"
@@ -25,7 +25,7 @@ function Jobdetail() {
     
     const handleApply=async()=>{
   
-       const url = "http://localhost:8000/user/applyforjob"
+       const url = "import.meta.env.VITE_BACKEND_URL/user/applyforjob"
        const data={
          jobid:job._id,
          userid:user._id

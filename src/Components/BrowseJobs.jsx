@@ -11,7 +11,7 @@ function BrowseJobs () {
     ;(
       
       async()=>{
-        const url ="http://localhost:8000/user/getalljobs"
+        const url ="import.meta.env.VITE_BACKEND_URL/user/getalljobs"
         const res= await axios(url,{
           mode:"no-cors",
           method:"post"
