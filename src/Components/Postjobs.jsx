@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import Loading from './Loading';
 
 
 function Postjobs() {
@@ -8,8 +9,11 @@ function Postjobs() {
     const [skillSet,setSkillSet]=useState([]);
     const [skill,setSkill]=useState("");
     const [isJobPosted,setIsJobPosted]=useState(false)
+    const [loading,setLoading]=useState(false);
+
 
     const postjob=async()=>{
+      setLoading(true)
       const url = `${import.meta.env.VITE_BACKEND_URL}/user/postjob`
       const data = {
         title,
@@ -29,6 +33,7 @@ function Postjobs() {
 
       console.log("job posted successfully ",job)
       setIsJobPosted(true)
+      setLoading(false)
       
     }
 
@@ -40,6 +45,13 @@ function Postjobs() {
             Your job is posted successfully  
             </div>
         </div>
+      )
+    }
+    if(loading){
+      return (
+        <>
+        <Loading/>
+        </>
       )
     }
 

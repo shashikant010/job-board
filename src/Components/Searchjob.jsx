@@ -4,17 +4,20 @@ import axios from 'axios'
 import { useOutletContext } from 'react-router-dom'
 
 import "../css/searchbox.css"
+import Loading from './Loading'
 
 
 function SearchJob () {
   const [jobs,setJobs]=useState([])
   const [serachItem,setSearchItem]=useState("")
+  const [loading,setLoading]=useState(false);
   
   useEffect(()=>{
-    
+
     ;(
       
       async()=>{
+        setLoading(true)
         const url =`${import.meta.env.VITE_BACKEND_URL}/user/searchjob/${serachItem}`
         const res= await axios(url,{
           mode:"no-cors",
@@ -22,11 +25,20 @@ function SearchJob () {
         })
         
         setJobs(res.data.data)
+        setLoading(false)
 
       }
 
     )()},[serachItem]
   )
+
+  // if(loading){
+  //   return (
+  //     <>
+  //     <Loading/>
+  //     </>
+  //   )
+  // }
   return (
     <>
     <div className='d-flex justify-content-center align-items-ceter '>
@@ -35,6 +47,8 @@ function SearchJob () {
   </div>
   
 </div>
+
+{loading && <Loading/>}
     
     <div className='d-flex flex-row flex-wrap'>
         

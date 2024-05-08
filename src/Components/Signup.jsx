@@ -16,6 +16,8 @@ function Signup() {
     const [success,setSuccess]=useState(false);
     const [error,setError]=useState(false);
     const [errorMessage,setErrorMessage]=useState("");
+    const [isOtpVerified,setIsOtpVerified]=useState(false);
+    const [isOtpSent,setIsOtpSent]=useState(false)
 
         
     const navigate=useNavigate();
@@ -171,10 +173,14 @@ function Signup() {
                     />
                 </div>
                 <div className='d-flex justify-content-center align-items-center my-2'>
-                <button  className="btn btn-primary my-2" onClick={handleSignup}>
+                {!isOtpVerified && <button  className="btn btn-primary my-2" onClick={handleSignup}>
+                    Send OTP
+                </button>
+                }
+               {isOtpVerified && <button  className="btn btn-primary my-2" onClick={handleSignup}>
                     Sign up
                 </button>
-                
+                }
                 
                 </div>
 </form>

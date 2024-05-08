@@ -1,17 +1,21 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import {  useOutletContext } from 'react-router-dom'
+import Loading from './Loading';
 
 function Jobdetail() {
   const [success,setSuccess]=useState(false);
   const [error,setError]=useState(null)
   const [owner,setOwner]=useState("")
+  const [loading,setLoading]=useState(false);
+
     const context = useOutletContext();
     const job=context[4]
     const user=context[2]
   
     const date= new Date(job.createdAt).toDateString()
     useEffect(()=>{
+      setLoading(true)
       if(!job){
       (async()=>{
         const url = `${import.meta.env.VITE_BACKEND_URL}/user/getitem/${job.owner}`;
@@ -20,11 +24,13 @@ function Jobdetail() {
           mode:"no-core"
         })
         setOwner(res.data.data)
+        setLoading(false)
       })()}
+      setLoading(false)
     })
     
     const handleApply=async()=>{
-  
+        setLoading(true)
        const url = `${import.meta.env.VITE_BACKEND_URL}/user/applyforjob`
        const data={
          jobid:job._id,
@@ -38,16 +44,29 @@ function Jobdetail() {
        }).catch((error)=>{
         if(error.response.status===409){
           setError("Already applied")
+          setLoading(false)
         }
-        else setError(error.message)
+        else {setError(error.message)
+          setLoading(false)
+        }
+        
        })
 
        if(res.status===200){
         setSuccess(true)
+        setLoading(false)
        }
      
 
       
+    }
+
+    if(loading){
+      return (
+        <>
+        <Loading/>
+        </>
+      )
     }
 
 

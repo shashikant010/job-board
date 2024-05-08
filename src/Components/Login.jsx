@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Cookies from "js-cookie";
 import { useOutletContext } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import Loading from './Loading';
 import "../css/form.css"
 
 function Login() {
@@ -13,6 +14,7 @@ function Login() {
   const [success,setSuccess]=useState(false);
   const [error,setError]=useState(false);
   const [errorMessage,setErrorMessage]=useState("");
+  const [loading,setLoading]=useState(false);
 
   const navigate=useNavigate()
 
@@ -22,6 +24,7 @@ function Login() {
   let accessToken = Cookies.get("accessToken")
   console.log(accessToken)
   const handleLogin=async(e)=>{
+    setLoading(true)
     try {
         e.preventDefault();
         const url = `${import.meta.env.VITE_BACKEND_URL}/user/login`
@@ -40,14 +43,22 @@ function Login() {
         console.log(user.data.data.accessToken)
         Cookies.set("accessToken",user.data.data.accessToken)
         setSuccess(true)
+        setLoading(false)
         setIsLogin(true)
         localStorage.setItem("accessToken",user.data.data.accessToken)
         navigate("/")
     } catch (error) {
         setError(true);
+        setLoading(false)
         setErrorMessage(error.message)
 
     }
+}
+
+if(loading){
+  return (<>
+  <Loading/>
+  </>)
 }
 
   return (
@@ -103,6 +114,7 @@ function Login() {
 </form>   
 
 </div>
+<Loading/>
 </>
   )
 }
