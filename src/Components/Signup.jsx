@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import "../css/button.css"
 
 function Signup() {
-    console.log("test")
+ 
     const [isEmployer,setIsEmployer]=useState(false)
     const [username,setUsername]= useState("");
     const [organization,setOrganization]=useState("")
@@ -36,7 +36,6 @@ function Signup() {
                 email,
                 password,isEmployer,organization
             }
-            console.log(data)
             const user = await axios(url,{
                 method: 'POST',
                 mode:"no-cors",
@@ -44,7 +43,6 @@ function Signup() {
                 ...data
             }
             })
-            console.log(user)
             setSuccess(true)
         } catch (error) {
             setError(true);
@@ -58,14 +56,12 @@ function Signup() {
         const data={
             email
         }
-        console.log(data)
         const res = await axios(url,{
             method: 'POST',
             mode:"no-cors",
             data
         
         })
-        console.log(res)
         const otpFromServer=res.data.data.toString()
     
         setCorrectOtp(otpFromServer);
@@ -183,7 +179,7 @@ function Signup() {
                 </div>}
 
                 <div className="form-group">
-                    <label htmlFor="Email">Email address</label>
+                    <label htmlFor="Email">Email address {isOtpVerified&& <span style={{color:"green"}}>verified</span>}</label>
                     <input
                     type="email"
                     className="form-control"
