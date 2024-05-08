@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import "../css/button.css"
 
 function Signup() {
+    console.log("test")
     const [isEmployer,setIsEmployer]=useState(false)
     const [username,setUsername]= useState("");
     const [organization,setOrganization]=useState("")
@@ -18,6 +19,9 @@ function Signup() {
     const [errorMessage,setErrorMessage]=useState("");
     const [isOtpVerified,setIsOtpVerified]=useState(false);
     const [isOtpSent,setIsOtpSent]=useState(false)
+    const [otp,setOtp]=useState("")
+    const [correctOtp,setCorrectOtp]=useState("")
+    const [wrongOtpWritten,setWrongOtpWritten]=useState(false)
 
         
     const navigate=useNavigate();
@@ -46,6 +50,35 @@ function Signup() {
             setError(true);
             setErrorMessage(error.message)
 
+        }
+    }
+
+    const sendOtp=async()=>{
+        const url = `${import.meta.env.VITE_BACKEND_URL}/user/sendotp`
+        const data={
+            email
+        }
+        console.log(data)
+        const res = await axios(url,{
+            method: 'POST',
+            mode:"no-cors",
+            data
+        
+        })
+        console.log(res)
+        const otpFromServer=res.data.data.toString()
+    
+        setCorrectOtp(otpFromServer);
+        setIsOtpSent(true)
+
+    }
+
+    const verifyOtp=()=>{
+        if(otp===correctOtp){
+            setIsOtpVerified(true)
+        }
+        else{
+            setWrongOtpWritten(true)
         }
     }
 
@@ -159,8 +192,34 @@ function Signup() {
                     id="Email"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
+                    disabled={isOtpSent}
                     />
                 </div>
+                {wrongOtpWritten&&<p className='danger'>OTP was wrong</p>}
+                {isOtpSent && !isOtpVerified && <div className='form-group'>
+                    <label htmlFor='otp'>Enter Otp</label>
+                    <input
+                    type="number"
+                    className='form-control'
+                    value={otp}
+                    onChange={(e)=>setOtp(e.target.value)}
+                    id="otp"
+                    placeholder='Enter Otp'
+                    />
+                    </div>}
+                {!isOtpVerified && !isOtpSent && <button  className="btn btn-primary my-2" onClick={(e)=>{
+                    e.preventDefault();
+                    sendOtp();
+                }}>
+                    Send OTP
+                </button>
+                }
+                {!isOtpVerified && isOtpSent &&<button  className="btn btn-primary my-2" onClick={(e)=>{
+                    e.preventDefault();
+                    verifyOtp();
+                }}>
+                    verify Otp
+                </button>}
                 <div className="form-group">
                     <label htmlFor="Password">Password</label>
                     <input
@@ -173,10 +232,7 @@ function Signup() {
                     />
                 </div>
                 <div className='d-flex justify-content-center align-items-center my-2'>
-                {!isOtpVerified && <button  className="btn btn-primary my-2" onClick={handleSignup}>
-                    Send OTP
-                </button>
-                }
+                
                {isOtpVerified && <button  className="btn btn-primary my-2" onClick={handleSignup}>
                     Sign up
                 </button>
