@@ -9,7 +9,7 @@ function Jobdetail() {
   const [owner,setOwner]=useState("")
   const [loading,setLoading]=useState(false);
 
-    const context = useOutletContext();
+    let context = useOutletContext();
     const job=context[4]
     const user=context[2]
   
@@ -61,7 +61,23 @@ function Jobdetail() {
       
     }
 
-    if(loading){
+
+
+useEffect(()=>{
+  (async()=>{
+    const res = await axios(`${import.meta.env.VITE_BACKEND_URL}/user/getitem/${context[2]._id}`,
+                    {
+                        method:"post",
+                        mode:"no-cors",
+                    }
+                )
+          context[2]=res.data.data
+              
+              })()
+},[success])
+
+
+if(loading){
       return (
         <>
         <Loading/>
@@ -73,13 +89,6 @@ function Jobdetail() {
   return (
     <>
     
-    {/* {success && <div className="alert alert-success" role="alert">
-            You have successfully applied</div>
-    }
-
-    {error && <div className="alert alert-danger" role="alert">
-            Error while applying {error}</div>} */}
-
 
     <div>
     {success && <div className="alert alert-success" role="alert">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Navbar from './Components/Navbar'
-import Home from './Components/Home'
 import { Outlet } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'js-cookie'
