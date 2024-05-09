@@ -6,28 +6,15 @@ import Loading from './Loading';
 function Jobdetail() {
   const [success,setSuccess]=useState(false);
   const [error,setError]=useState(null)
-  const [owner,setOwner]=useState("")
   const [loading,setLoading]=useState(false);
 
     let context = useOutletContext();
     const job=context[4]
     const user=context[2]
+    console.log(job)
   
     const date= new Date(job.createdAt).toDateString()
-    useEffect(()=>{
-      setLoading(true)
-      if(!job){
-      (async()=>{
-        const url = `${import.meta.env.VITE_BACKEND_URL}/user/getitem/${job.owner}`;
-        const res = await axios(url,{
-          method:"post",
-          mode:"no-core"
-        })
-        setOwner(res.data.data)
-        setLoading(false)
-      })()}
-      setLoading(false)
-    })
+  
     
     const handleApply=async()=>{
         setLoading(true)
@@ -101,7 +88,7 @@ if(loading){
             <div style={{backgroundColor:"lightgray", height:"500px"}} className='p-3 d-flex justify-cotent-center align-items-center flex-column'>
               <div><b style={{fontSize:"30px"}}>skills required : </b> <b style={{fontSize:"30px"}}>{job.skillSet+""}</b> <br/></div>
               <div><b style={{fontSize:"30px"}}>Job description : </b> <b style={{fontSize:"30px"}}>{job.description}</b> <br/></div>
-              <div><b style={{fontSize:"30px"}}>Job owner : </b> <b style={{fontSize:"30px"}}>{owner.fullName}</b> <br/></div>
+           
               <div><b style={{fontSize:"30px"}}>posted on : </b> <b style={{fontSize:"30px"}}>{date}</b> <br/></div>
               <button  type="button" className="btn btn-success my-2" onClick={handleApply}>Apply Now</button></div>
             </div>
