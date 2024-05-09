@@ -11,6 +11,7 @@ import BrowseJobs from './Components/BrowseJobs.jsx'
 import Postjobs from './Components/Postjobs.jsx'
 import Jobdetail from './Components/Jobdetail.jsx'
 import SearchJob from './Components/Searchjob.jsx'
+import JobRemoved from './Components/JobRemoved.jsx'
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,9 @@ const router = createBrowserRouter([
       {
         path:"/search",
         element:<SearchJob/>
+      },{
+        path:"/removed",
+        element:<JobRemoved/>
       }
     ]
   }

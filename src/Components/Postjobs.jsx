@@ -105,8 +105,6 @@ function Postjobs() {
     />
 
     
-      
-    
     <div className="input-group-append">
       <span className="input-group-text" id="basic-addon2">
         skills Required
@@ -114,6 +112,17 @@ function Postjobs() {
     </div>
     
   </div>
+
+
+  <button className="btn btn-primary my-2" onClick={(e)=>{
+    e.preventDefault()
+    setSkillSet((prevSkills)=>{prevSkills.push(skill)
+         return prevSkills});
+    setSkill("")
+  }}>
+                    Add skill
+                </button>
+
   <div>
   
 

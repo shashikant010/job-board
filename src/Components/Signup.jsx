@@ -134,7 +134,9 @@ function Signup() {
                     />
                 </div>
 
-                {!isEmployer && <div className="form-group">
+                {!isEmployer && 
+                <>
+                <div className="form-group">
                     <label htmlFor="skills">Skills</label>
                     {skills[0] && <p>skills you selected : {skills.map((item)=>{
                         return(<span>
@@ -146,7 +148,7 @@ function Signup() {
                     className="form-control"
                     value={skill}
                     id="skills"
-                    placeholder="Enter Sills you have"
+                    placeholder="Enter Skills you have"
                     onChange={(e)=>{
                         setSkill(e.target.value)
                     
@@ -160,7 +162,18 @@ function Signup() {
                         
                     }}}
                     />
-                </div>}
+                </div>
+                
+                <button  className="btn btn-success my-2" onClick={(e)=>{
+                    e.preventDefault();
+                    setSkills((prevSkills)=>{prevSkills.push(skill)
+                        return prevSkills});
+                   setSkill("")
+                }}>
+                    Add skill
+                </button>
+                </>
+                }
 
 
                 {isEmployer && <div className="form-group">

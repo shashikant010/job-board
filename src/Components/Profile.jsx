@@ -6,21 +6,22 @@ import axios from 'axios';
 // {!isLogin && <h1>Please Login to see your profile</h1>}
 function Profile() {
     const [isLogin]=useOutletContext()
-    const context = useOutletContext();
+    let context = useOutletContext();
     const navigate = useNavigate()
     const user=context[2]
-    
 
-        
-
-
-    
+    const [isJobRemoved,setIsJobRemoved]=useState(false)
+  
     console.log(user)
     let lastLoginTime=null;
     if(isLogin){
         const date=new Date(user.updatedAt)
         console.log(date)
         lastLoginTime=date.toString()
+    }
+
+    if(isJobRemoved){
+        navigate("/removed")
     }
 
     
@@ -80,17 +81,36 @@ function Profile() {
                                     method:"post",
                                     mode:"no-core"
                                     })
+                                    console.log(res.data.data)
                                     setTitle(res.data.data.title);
                                     setDescription(res.data.data.description)
                                 })()
                             })
+
+                            const removeJob=async()=>{
+                                const url = `${import.meta.env.VITE_BACKEND_URL}/user/removejob`;
+                                const res = await axios(url,{
+                                    method:"post",
+                                    mode:"no-cors",
+                                    data:{
+                                        userid:user._id,
+                                        jobid:item
+                                    }
+                                })
+                                console.log(res)
+                                context[2]=res.data.data.user
+                                setIsJobRemoved(true)
+                                
+                            }
+
+                            
 
                             return(
                                 <div className="card m-4" style={{width: "18rem"}}>
                                 <div className="card-body">
                                     <h5 className="card-title">{title}</h5>
                                     <p className="card-text">{description}</p>
-                                    <button to="/jobdetail" className="btn btn-primary" onClick={()=>{}}>remove JOB</button>
+                                    <button to="/jobdetail" className="btn btn-primary" onClick={removeJob}>remove JOB</button>
                                 </div>
                                 </div>
                             )
