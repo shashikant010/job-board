@@ -28,6 +28,11 @@ function ForgotPass() {
     const navigate=useNavigate()
 
     const sendOtp=async()=>{
+        if(email===""){
+            setError(true)
+            setErrorMessage("Please enter Your Email")
+            return
+        }
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/user/sendotp`
             const data={
@@ -174,6 +179,7 @@ const saveChangedPassword=async()=>{
                     onChange={(e)=>setOtp(e.target.value)}
                     id="otp"
                     placeholder='Enter Otp'
+                    
                     />
 </div>}
                 {!isOtpVerified && !isOtpSent && <button id="button" onClick={(e)=>{
