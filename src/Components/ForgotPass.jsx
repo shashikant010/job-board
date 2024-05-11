@@ -130,7 +130,7 @@ const saveChangedPassword=async()=>{
     <div className='d-flex justify-content-center align-items-ceter my-4'>
    
 <form action="" className="form_main">
-    {!isOtpVerified && <p className="heading">Oops ! you forgot it again | Don't worry</p>}
+    {!isOtpVerified && <p className="heading" style={{fontSize:"30px"}}>Oops ! you forgot it again | Don't worry</p>}
     {isOtpVerified && <p className="heading">Hii {user.username}</p>}
     <div className="inputContainer">
         <svg className="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2e2e2e" viewBox="0 0 16 16">
