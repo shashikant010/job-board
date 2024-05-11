@@ -40,7 +40,6 @@ function ForgotPass() {
             
             })
             const otpFromServer=res.data.data.toString()
-            console.log(res)
             setCorrectOtp(otpFromServer);
             setIsOtpSent(true)
         } catch (error) {
@@ -61,8 +60,7 @@ function ForgotPass() {
                     data:{email}
                 })
                 setUser(res.data.data[0])
-                console.log(user)
-                setIsOtpVerified(true)
+          setIsOtpVerified(true)
             } catch (error) {
                 setError(true)
                 setErrorMessage(error.message)
