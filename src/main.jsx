@@ -12,6 +12,7 @@ import Postjobs from './Components/Postjobs.jsx'
 import Jobdetail from './Components/Jobdetail.jsx'
 import SearchJob from './Components/Searchjob.jsx'
 import JobRemoved from './Components/JobRemoved.jsx'
+import ForgotPass from './Components/ForgotPass.jsx'
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       },{
         path:"/removed",
         element:<JobRemoved/>
+      },
+      {
+        path:"/forgotpass",
+        element:<ForgotPass/>
       }
     ]
   }

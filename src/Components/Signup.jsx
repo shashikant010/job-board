@@ -3,7 +3,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "../css/button.css"
-
 function Signup() {
  
     const [isEmployer,setIsEmployer]=useState(false)
@@ -204,7 +203,7 @@ function Signup() {
                     disabled={isOtpSent}
                     />
                 </div>
-                {wrongOtpWritten&&<p className='danger'>OTP was wrong</p>}
+                {wrongOtpWritten&&<p className='btn-danger'>OTP was wrong</p>}
                 {isOtpSent && !isOtpVerified && <div className='form-group'>
                     <label htmlFor='otp'>Enter Otp</label>
                     <input

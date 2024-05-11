@@ -114,7 +114,6 @@ if(loading){
 </form>   
 
 </div>
-<Loading/>
 </>
   )
 }
