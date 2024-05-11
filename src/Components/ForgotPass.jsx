@@ -33,17 +33,20 @@ function ForgotPass() {
             const data={
                 email
             }
+            setLoading(true)
             const res = await axios(url,{
                 method: 'POST',
                 mode:"no-cors",
                 data
             
             })
+            setLoading(false)
             const otpFromServer=res.data.data.toString()
             setCorrectOtp(otpFromServer);
             setIsOtpSent(true)
         } catch (error) {
             setError(true)
+            setLoading(false)
             setErrorMessage(error.message)
         }
 
@@ -54,19 +57,23 @@ function ForgotPass() {
         if(otp===correctOtp){
             try {
                 const url = `${import.meta.env.VITE_BACKEND_URL}/user/getuserbymail`
+                setLoading(true)
                 const res = await axios(url,{
                     method:"post",
                     mode:"no-cors",
                     data:{email}
                 })
+                setLoading(false)
                 setUser(res.data.data[0])
           setIsOtpVerified(true)
             } catch (error) {
+                setLoading(false)
                 setError(true)
                 setErrorMessage(error.message)
             }
         }
         else{
+            setLoading(false)
             setWrongOtpWritten(true)
         }
     }
@@ -74,6 +81,7 @@ function ForgotPass() {
 
 const saveChangedPassword=async()=>{
     try {
+        setLoading(true)
         const url = `${import.meta.env.VITE_BACKEND_URL}/user/changepassword`
     
         const res = axios(url,{
@@ -81,11 +89,12 @@ const saveChangedPassword=async()=>{
             mode:"no-cors",
             data:{email,password}
         })
-    
+        setLoading(false)
         setSuccess(true)
     } catch (error) {
         setError(true)
             setErrorMessage(error.message)
+            setLoading(false)
     }
 
 }
@@ -106,7 +115,7 @@ const saveChangedPassword=async()=>{
   return (
     <>
 
-    //success or errors handling
+  
     {success && <div className="alert alert-success" role="alert">
             Congrats your password is changed <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
 </div>}
