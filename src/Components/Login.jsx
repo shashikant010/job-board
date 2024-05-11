@@ -110,7 +110,7 @@ if(loading){
               
            
 <button id="button" onClick={handleLogin}>Submit</button>
-    <a className="forgotLink" href="#">Forgot your password?</a>
+    <Link className="forgotLink" to="/forgotpass">Forgot your password?</Link>
 </form>   
 
 </div>

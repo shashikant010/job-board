@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import "../css/form.css"
 
 function ForgotPass() {
 
@@ -26,41 +28,69 @@ function ForgotPass() {
     const navigate=useNavigate()
 
     const sendOtp=async()=>{
-        const url = `${import.meta.env.VITE_BACKEND_URL}/user/sendotp`
-        const data={
-            email
+        try {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/user/sendotp`
+            const data={
+                email
+            }
+            const res = await axios(url,{
+                method: 'POST',
+                mode:"no-cors",
+                data
+            
+            })
+            const otpFromServer=res.data.data.toString()
+            console.log(res)
+            setCorrectOtp(otpFromServer);
+            setIsOtpSent(true)
+        } catch (error) {
+            setError(true)
+            setErrorMessage(error.message)
         }
-        const res = await axios(url,{
-            method: 'POST',
-            mode:"no-cors",
-            data
-        
-        })
-        const otpFromServer=res.data.data.toString()
-        console.log(res)
-        setCorrectOtp(otpFromServer);
-        setIsOtpSent(true)
 
     }
 
 
     const verifyOtp=async()=>{
         if(otp===correctOtp){
-            const url = `${import.meta.env.VITE_BACKEND_URL}/user/getuserbymail`
-            const res = await axios(url,{
-                method:"post",
-                mode:"no-cors",
-                data:{email}
-            })
-            setUser(res.data.data[0])
-            console.log(user)
-            setIsOtpVerified(true)
+            try {
+                const url = `${import.meta.env.VITE_BACKEND_URL}/user/getuserbymail`
+                const res = await axios(url,{
+                    method:"post",
+                    mode:"no-cors",
+                    data:{email}
+                })
+                setUser(res.data.data[0])
+                console.log(user)
+                setIsOtpVerified(true)
+            } catch (error) {
+                setError(true)
+                setErrorMessage(error.message)
+            }
         }
         else{
             setWrongOtpWritten(true)
         }
     }
 
+
+const saveChangedPassword=async()=>{
+    try {
+        const url = `${import.meta.env.VITE_BACKEND_URL}/user/changepassword`
+    
+        const res = axios(url,{
+            method:"post",
+            mode:"no-cors",
+            data:{email,password}
+        })
+    
+        setSuccess(true)
+    } catch (error) {
+        setError(true)
+            setErrorMessage(error.message)
+    }
+
+}
 
 
 
@@ -72,17 +102,19 @@ function ForgotPass() {
     <Loading/>
     </>)
   }
+
+
   
   return (
     <>
 
     //success or errors handling
     {success && <div className="alert alert-success" role="alert">
-            You are logged in <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
+            Congrats your password is changed <Link to="/login"><button type="button" className="btn btn-primary">Login Now</button></Link>
 </div>}
 
     {error && <div className="alert alert-danger" role="alert">
-  Some error occured while Logging in . <br />
+  Some error occured while changing password. <br />
   error : {errorMessage}<br/>
   please try again after some timea
 </div>}
@@ -112,29 +144,18 @@ function ForgotPass() {
     
 
 
-    {wrongOtpWritten&&<p className='btn-danger'>OTP was wrong</p>}
+    
 
   
 
 
     </div>
-    
-{/* <div className="inputContainer">
-    <svg className="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2e2e2e" viewBox="0 0 16 16">
-    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
-    </svg>
-    <input
-      type="password"
-      className="inputField"
-      value={password}
-      onChange={(e)=>setPassword(e.target.value)}
-      id="Password"
-      placeholder="Password"
-    />
-</div> */}
-              
-           
-              {isOtpSent && !isOtpVerified &&<div className="inputContainer">
+    {wrongOtpWritten &&
+
+<h1 style={{color:"red",fontSize:"20px"}}>OTP was wrong</h1> 
+}
+
+              {isOtpSent && !isOtpVerified &&  <div className="inputContainer">
     <svg className="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2e2e2e" viewBox="0 0 16 16">
     <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
     </svg>
@@ -147,18 +168,43 @@ function ForgotPass() {
                     placeholder='Enter Otp'
                     />
 </div>}
-                {!isOtpVerified && !isOtpSent && <button id="button" className="btn btn-primary my-2" onClick={(e)=>{
+                {!isOtpVerified && !isOtpSent && <button id="button" onClick={(e)=>{
                     e.preventDefault();
                     sendOtp();
                 }}>
                     Send OTP
                 </button>
                 }
-                {!isOtpVerified && isOtpSent &&<button  className="btn btn-primary my-2" onClick={(e)=>{
+                {!isOtpVerified && isOtpSent &&<button  id="button" onClick={(e)=>{
                     e.preventDefault();
                     verifyOtp();
                 }}>
                     verify Otp
+                </button>}
+
+
+{isOtpVerified && <>
+                <div className="inputContainer">
+    <svg className="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2e2e2e" viewBox="0 0 16 16">
+    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+    </svg>
+    <input
+      type="password"
+      className="inputField"
+      value={password}
+      onChange={(e)=>setPassword(e.target.value)}
+      id="Password"
+      placeholder="Enter New Password"
+    />
+</div>
+<p>Your new password is {password}</p>
+</> }
+
+{isOtpVerified &&<button id="button" onClick={(e)=>{
+                    e.preventDefault();
+                    saveChangedPassword();
+                }}>
+                    Save password
                 </button>}
   
 </form>   
