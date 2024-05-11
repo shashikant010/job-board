@@ -54,6 +54,7 @@ function ForgotPass() {
 
 
     const verifyOtp=async()=>{
+        setWrongOtpWritten(false)
         if(otp===correctOtp){
             try {
                 const url = `${import.meta.env.VITE_BACKEND_URL}/user/getuserbymail`
