@@ -24,4 +24,24 @@
     color: rgb(19, 19, 19);
     font-size: 13.4px;
   }
+
+  .main{
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+    margin: 30px;
+}
+
+.card{
+    width: 20%;
+}
+
+@media  screen and (max-width:900px) {
+    .main{
+        flex-direction: column;
+    }
+    .card{
+        width: 100%;
+    }
+}
   

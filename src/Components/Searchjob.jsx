@@ -50,10 +50,10 @@ function SearchJob () {
 
 {loading && <Loading/>}
     
-    <div className='d-flex flex-row flex-wrap'>
+    <div className='main'>
         
        {jobs.map((job)=>{
-        return(<span key={job._id} className='d-flex flex-row ' style={{width:"20%"}}>
+        return(<span key={job._id} className='card'>
           <Job title={job.title}  description={job.description} job={job}/>
         </span>)
        })}
