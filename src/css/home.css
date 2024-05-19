@@ -1,0 +1,22 @@
+.first{
+    font-size: 70px;
+}
+.second{
+    font-size: 80px;
+}
+.p{
+    font-size: 30px;
+}
+
+@media screen and (max-width:900px) {
+    
+    .first{
+        font-size: 30px;
+    }
+    .second{
+        font-size: 30px;
+    }
+    .p{
+        font-size: 14px;
+    }
+}

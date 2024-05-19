@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import "../css/navbar.css"
 
 function Navbar({isLogin,user,setIsLogin,setUser}) {
   console.log(user)
@@ -14,6 +15,7 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className='logos'>
   <Link className="navbar-brand" to="/">
      &nbsp; Job Board
   </Link>
@@ -39,8 +41,9 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
       
       
     </ul>
-    
+    </div>
   </div>
+  <div className='logins'>
   {!isLogin&&<Link to="/login"><button>
     Login
     <div className="arrow-wrapper">
@@ -55,6 +58,9 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
 
     </div>
 </button></Link>}
+
+
+  </div>
   {isLogin&&<button type="button" onClick={logout} className="btn btn-primary mx-2">Logout</button>}
   {isLogin&&<Link to="/profile"><button type="button" className="btn btn-warning  mx-2 rounded-circle font-weight-bold ">{user.fullName }</button></Link>} 
 </nav>

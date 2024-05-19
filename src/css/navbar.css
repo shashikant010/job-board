@@ -1,0 +1,23 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.logos{
+    display: flex;
+    width: 100%;
+}
+.logins{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width:1000px){
+    .logos{
+        justify-content: space-between;
+    }
+    .logins{
+        justify-content: space-between;
+    }
+}
