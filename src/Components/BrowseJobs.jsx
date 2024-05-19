@@ -3,6 +3,7 @@ import Job from './Job'
 import axios from 'axios'
 import { useOutletContext } from 'react-router-dom'
 import Loading from './Loading'
+import "../css/browsejobs.css"
 
 function BrowseJobs () {
   const [jobs,setJobs]=useState([])
@@ -36,9 +37,9 @@ function BrowseJobs () {
     )
   }
   return (
-    <div className='d-flex flex-row flex-wrap'>
+    <div className='main'>
        {jobs.map((job)=>{
-        return(<span key={job._id} className='d-flex flex-row ' style={{width:"20%"}}>
+        return(<span key={job._id} className='d-flex flex-row card'>
           <Job title={job.title}  description={job.description} job={job}/>
         </span>)
        })}
