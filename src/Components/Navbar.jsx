@@ -19,7 +19,7 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
   <Link className="navbar-brand" to="/">
      &nbsp; Job Board
   </Link>
-  <button
+  {/* <button
     className="navbar-toggler"
     type="button"
     data-toggle="collapse"
@@ -29,12 +29,12 @@ function Navbar({isLogin,user,setIsLogin,setUser}) {
     aria-label="Toggle navigation"
   >
     <span className="navbar-toggler-icon" />
-  </button>
-  <div className="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul className="navbar-nav">
+  </button> */}
+  <div className="" id="navbarNavDropdown">
+    <ul className="navbar-nav ">
       
       <li className="nav-item">
-        <Link className="nav-link" to="/search">
+        <Link className="nav-link px-3 text-black font-extrabold" to="/search">
            Search Jobs 
         </Link>
       </li>

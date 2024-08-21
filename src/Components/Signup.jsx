@@ -93,7 +93,7 @@ function Signup() {
 </div>}
 
                         <div className='d-flex justify-content-center align-items-ceter my-4 '>
-                                <form className='w-50' >
+                                <form className='w-60' >
                                 <div className="form-check">
                             <input 
                             checked={isEmployer}

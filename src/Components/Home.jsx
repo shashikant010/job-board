@@ -8,9 +8,9 @@ function Home() {
   const [isLogin] = useOutletContext();
   return (
     <>
-      <div className="d-flex flex-column justify-content-center align-items-center my-5 main" style={{height:"400px",fontSize:"20px"}}>
-        <h2 className='first'>Search ,Apply</h2>
-        <h2 className='second'>And get Your <span className="text-success">Dream Job</span></h2>
+      <div className="d-flex flex-column justify-content-center align-items-center my-5 main text-center" style={{height:"400px",fontSize:"20px"}}>
+        <h2 className='first'>Search , Apply</h2>
+        <h2 className='second '>And get Your <span className="text-success">Dream Job</span></h2>
         <p  className='p'>Start Your hunt for the best life changing career opportunity</p>
         <button type="button" onClick={()=>{
           navigate("/browsejobs")
